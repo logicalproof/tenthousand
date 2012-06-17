@@ -1,10 +1,6 @@
 require_relative 'Value_Check.rb'
 class ScoreChecker
-	include StraightChecker
-	include ThreePairChecker
-	include ThreeOfAKind
-	include OneChecker
-	include FiveChecker
+	include ValueChecker
 	attr_accessor 	:current_roll_eval, :threepair, :straight, 
 				:threeones, :threetwos, :threethrees, 
 				:threefours, :threefives, :threesixes,

@@ -45,7 +45,7 @@ while  winner == :false
 			end
 			points_area.uniq! #prevents you from entering the same number multiple times
 			if this_roll.length != 0
-			puts 'You kept ' + this_roll.to_s #THis is where to INSERT THE POINT SCANNER
+			  puts 'You kept ' + this_roll.to_s #THis is where to INSERT THE POINT SCANNER
 			end
 			this_roll.sort!
 			x = ScoreChecker.new this_roll
@@ -131,49 +131,46 @@ while  winner == :false
 					cup = (6 - points_area.length)
 				else
 					cup = 0
-					if host.people[number-1].bankscore == 0
-						if host.people[number-1].score >= 700
+					if host.people[number-1].banked_score == 0
+						if host.people[number-1].score <= 700
 							puts 'Not enough points to get on the board'
 							host.people[number-1].score = 0
-							puts 'Banked Points: ' + host.people[number-1].bankscore.to_s
+							puts 'Banked Points: ' + host.people[number-1].banked_score.to_s
 						else
-							host.people[number-1].bankscore
-							host.people[number-1].score = 0
 							puts 'Banked Points: ' + host.people[number-1].bankscore.to_s
+							host.people[number-1].score = 0
 						end
 					else
-						host.people[number-1].bankscore
-						host.people[number-1].score = 0
 						puts 'Banked Points: ' + host.people[number-1].bankscore.to_s
+						host.people[number-1].score = 0
 					end
+				end
+			else
+				cup = 0
+				puts 'YOU BUSTED!!!'
+				host.people[number-1].score = 0
+				x.scoredpoints = :false
+				puts 'Banked Points: ' + host.people[number-1].banked_score.to_s
+			end
+			if cup == 0
+				if x.scoredpoints == :true
+					cup = 6
+					if roll_again == 'y'
+						x.scoredpoints = :rollagain
+					else
+						x.scoredpoints = :false
+						cup = 0
 					end
-				else
-					cup = 0
-					puts 'YOU BUSTED!!!'
-					host.people[number-1].score = 0
-					x.scoredpoints = :false
-					puts 'Banked Points: ' + host.people[number-1].bankscore.to_s
 				end
-				if cup == 0
-					if x.scoredpoints == :true
-						cup = 6
-						if roll_again == 'y'
-							x.scoredpoints = :rollagain
-						else
-							x.scoredpoints = :false
-							cup = 0
-						end
-					ends
-				end
-		total_roll = [] #location of saved sets
-		out_of_cup = [] 
-	end
-end
-if host.people[number-1].bankscore.to_i >= 10000
-	winner = :true
-	puts host.people[number-1].name + ' WINS!!'
-end
-end
+			end
+  		total_roll = [] #location of saved sets
+  		out_of_cup = [] 
+  	end
+    if host.people[number-1].bankscore.to_i >= 10000
+    	winner = :true
+    	puts host.people[number-1].name + ' WINS!!'
+    end
+  end
 end
 
 
